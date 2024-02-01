@@ -12,7 +12,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <scala.binary.version>2.12</scala.binary.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <flink.version>1.18.1</flink.version> <!-- Use the latest stable Flink version -->
