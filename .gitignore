@@ -1,16 +1,26 @@
-# Compiled class file
+# Ignore everything in the flink-test directory
+flink-test/*
+
+# Except for the source files (adjust the pattern as needed)
+!flink-test/**/*.java
+!flink-test/**/*.xml
+!flink-test/**/*.properties
+!flink-test/**/*.json
+# ... any other file extensions or specific files you want to keep
+
+# Compiled class files
 *.class
 
-# Log file
+# Log files
 *.log
 
-# BlueJ files
+# BlueJ project files
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
+# Mobile Tools for Java (J2ME) temporary files
 .mtj.tmp/
 
-# Package Files #
+# Package files
 *.jar
 *.war
 *.nar
@@ -19,6 +29,6 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# JVM crash logs
 hs_err_pid*
 replay_pid*
