@@ -1,67 +1,71 @@
-# Apache Flink Demo Docker Setup
+# Flink Dockerized Environment
 
-This guide provides instructions on how to set up and run an Apache Flink application using Docker. This setup is ideal for development, testing, and experimentation with Flink in a containerized environment.
-
-## Prerequisites
-
-- **Docker Desktop**: Ensure you have Docker Desktop installed on your machine. It's available for Windows, Mac, and Linux. You can download it from [Docker's official website](https://www.docker.com/products/docker-desktop).
+This repository contains a Dockerized Apache Flink environment for easy development and deployment of Flink jobs. It includes Docker Compose configurations for setting up a Flink cluster and a development environment where you can compile and run Flink jobs.
 
 ## Getting Started
 
-### Step 1: Clone the Repository
+### Prerequisites
 
-First, clone the repository containing the Docker setup and Flink application. If the repository is not available, you can create the necessary files (`Dockerfile`, `docker-compose.yml`, Java source files, and `pom.xml`) based on the structure described in this guide.
+- Docker
+- Docker Compose
 
-```bash
-git clone https://github.com/hanss0n/Apache-Flink-Demo
-cd Apache-Flink-Demo
+### Building the Environment
+
+To build the Docker images for the Flink cluster and set up the environment, run the following command:
+
+```sh
+docker-compose build
 ```
 
-### Step 2: Build the Docker Image
+### Starting the Services
 
-Navigate to the directory containing the Dockerfile and build the Docker image. This process involves downloading the base image, installing necessary dependencies, and compiling your Flink application.
+To start the Flink cluster in detached mode, use the following command:
 
-```bash
-docker compose build
+```sh
+docker-compose up -d
 ```
 
-### Step 3: Start the Flink Cluster
+This will start the services defined in `docker-compose.yml`, including the Flink JobManager and TaskManagers.
 
-Run the following command to start the Flink cluster. This command starts the necessary Docker containers for the Flink JobManager and TaskManagers.
+### Accessing the JobManager Shell
 
-```bash
-docker compose up -d
+To access the shell of the JobManager container, use the following command:
+
+```sh
+docker-compose exec jobmanager /bin/bash
 ```
 
-### Step 4: Access the Flink Dashboard
+This will give you a bash shell inside the `jobmanager` service container.
 
-You can access the Flink Web UI to monitor the cluster and jobs. Open your web browser and navigate to:
+### Accessing the Flink Dashboard
+
+The Flink Dashboard is accessible through your web browser. Once the services are up, you can visit:
 
 ```
 http://localhost:8081
 ```
 
-### Step 5: Submitting a Flink Job
+This will bring up the Flink Dashboard where you can monitor and control your Flink jobs.
 
-To submit a job to the Flink cluster:
+### Running a Flink Job
 
-1. Retrieve the jobmanager container name:
-   ```bash
-   docker ps -f "name=flink_test-jobmanager" --format "{{.ID}}"
-   ```
+To run a Flink job, such as the WordCount example, you can use the following command structure:
 
-   Access the JobManager container's shell:
+```sh
+flink run -c com.example.WordCount /target/original-flink-test-1.0-SNAPSHOT.jar
+```
 
-   ```bash
-   docker exec -it [jobmanager-container-name] /bin/bash
-   ```
+### Development Workflow
 
-   Replace `[jobmanager-container-name]` with the name of your JobManager container.
+The repository is mounted within the JobManager service, allowing you to edit the code outside Docker on your host machine. After editing, you can compile the code inside the `jobmanager` container using Maven:
 
-2. Run the following command to submit the Flink job:
+```sh
+mvn clean package
+```
 
-   ```bash
-   ./bin/flink run /opt/flink/usrlib/flink-test.jar
-   ```
+This will compile your Flink job and create the necessary JAR file to be submitted to the Flink cluster.
 
+## Contributing
+
+Feel free to fork this repository and submit pull requests with enhancements or fixes.
 
