@@ -3,9 +3,8 @@ services:
     build: .
     ports:
       - "8081:8081"
-    # Removed depends_on itself
     volumes:
-      - ./flink-test:/project # Only include if necessary
+      - ./flink-test:/project
     working_dir: /project
     command: jobmanager
     environment:
