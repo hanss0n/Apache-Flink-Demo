@@ -64,20 +64,4 @@ To submit a job to the Flink cluster:
    ./bin/flink run /opt/flink/usrlib/flink-test.jar
    ```
 
-### Step 6: Monitoring and Logs
-
-- Monitor the job's execution in the Flink Web UI at `http://localhost:8081`.
-- Check logs within the JobManager and TaskManager containers for detailed information.
-
-## Troubleshooting
-
-- **Build Issues**: If you encounter issues during the Docker build process, check the console output for errors. Ensure all files are correctly placed as per the Dockerfile's instructions.
-- **Flink Web UI**: If you cannot access the Flink Web UI, ensure that Docker Desktop is running and the container ports are correctly mapped.
-- **Job Submission**: If you encounter errors when submitting a job, verify that the JAR file path is correct and the Flink cluster is running.
-
-## Additional Information
-
-For more detailed information about Apache Flink and Docker, please refer to the official documentation:
-- [Apache Flink Documentation](https://flink.apache.org/documentation.html)
-- [Docker Documentation](https://docs.docker.com/)
 
