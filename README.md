@@ -1,8 +1,4 @@
-Certainly! Below is a template for a `README.md` file that you can use to guide someone through setting up and running your Dockerized Apache Flink application. You may need to adjust some of the specifics to fit your exact setup.
-
----
-
-# Apache Flink Docker Setup
+# Apache Flink Demo Docker Setup
 
 This guide provides instructions on how to set up and run an Apache Flink application using Docker. This setup is ideal for development, testing, and experimentation with Flink in a containerized environment.
 
