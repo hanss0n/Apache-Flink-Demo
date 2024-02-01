@@ -1,6 +1,0 @@
-com/example/BatchJob.class
-com/example/WordCount$LineSplitter.class
-com/example/SocketTextStreamWordCount.class
-com/example/StreamingJob.class
-com/example/WordCount.class
-com/example/SocketTextStreamWordCount$LineSplitter.class
