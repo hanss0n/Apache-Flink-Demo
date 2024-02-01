@@ -17,18 +17,16 @@ This guide provides instructions on how to set up and run an Apache Flink applic
 First, clone the repository containing the Docker setup and Flink application. If the repository is not available, you can create the necessary files (`Dockerfile`, `docker-compose.yml`, Java source files, and `pom.xml`) based on the structure described in this guide.
 
 ```bash
-git clone [Your-Repository-URL]
-cd [Your-Repository-Name]
+git clone https://github.com/hanss0n/Apache-Flink-Demo
+cd Apache-Flink-Demo
 ```
-
-Replace `[Your-Repository-URL]` and `[Your-Repository-Name]` with the actual URL and name of your repository.
 
 ### Step 2: Build the Docker Image
 
 Navigate to the directory containing the Dockerfile and build the Docker image. This process involves downloading the base image, installing necessary dependencies, and compiling your Flink application.
 
 ```bash
-docker-compose build
+docker compose build
 ```
 
 ### Step 3: Start the Flink Cluster
@@ -36,7 +34,7 @@ docker-compose build
 Run the following command to start the Flink cluster. This command starts the necessary Docker containers for the Flink JobManager and TaskManagers.
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Step 4: Access the Flink Dashboard
@@ -51,7 +49,12 @@ http://localhost:8081
 
 To submit a job to the Flink cluster:
 
-1. Access the JobManager container's shell:
+1. Retrieve the jobmanager container name:
+   ```bash
+   docker ps -f "name=flink_test-jobmanager" --format "{{.ID}}"
+   ```
+
+   Access the JobManager container's shell:
 
    ```bash
    docker exec -it [jobmanager-container-name] /bin/bash
