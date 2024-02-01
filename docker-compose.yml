@@ -3,14 +3,26 @@ services:
     build: .
     ports:
       - "8081:8081"
+    # Removed depends_on itself
+    volumes:
+      - ./flink-test:/project # Only include if necessary
+    working_dir: /project
     command: jobmanager
     environment:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8081/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   taskmanager:
-    build: .
+    image: flink:latest
     depends_on:
       - jobmanager
     command: taskmanager
     environment:
-      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+      JOB_MANAGER_RPC_ADDRESS: jobmanager
+
